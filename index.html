@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Swallowing the Anchor — For Captain Noor Mohammed, IN</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --navy: #0a1628;
+    --gold: #c9a84c;
+    --gold-light: #e8d5a0;
+    --cream: #faf6ee;
+    --ink: #1a1a1a;
+    --text: #2c2c2c;
+    --muted: #6b6b6b;
+    --white: #ffffff;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-size: 18px;
+  }
+
+  body {
+    background: var(--cream);
+    color: var(--text);
+    font-family: 'EB Garamond', 'Georgia', serif;
+    line-height: 1.85;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* — Hero — */
+  .hero {
+    min-height: 100vh;
+    min-height: 100svh;
+    background: var(--navy);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(201,168,76,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 50%, rgba(201,168,76,0.04) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  /* Anchor SVG */
+  .anchor-symbol {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeIn 2s ease 0.5s forwards;
+  }
+
+  .anchor-symbol svg {
+    width: 100%;
+    height: 100%;
+    fill: var(--gold);
+    filter: drop-shadow(0 0 12px rgba(201,168,76,0.3));
+  }
+
+  .hero-epigraph {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-style: italic;
+    color: var(--gold-light);
+    max-width: 600px;
+    line-height: 1.9;
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeIn 2s ease 1s forwards;
+    letter-spacing: 0.01em;
+  }
+
+  .hero-epigraph .attribution {
+    display: block;
+    margin-top: 0.75rem;
+    font-style: normal;
+    font-size: 0.85rem;
+    color: var(--gold);
+    opacity: 0.7;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    font-weight: 600;
+    color: var(--white);
+    letter-spacing: 0.02em;
+    margin-bottom: 0.5rem;
+    opacity: 0;
+    animation: fadeIn 2s ease 1.8s forwards;
+  }
+
+  .hero-subtitle {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.05rem;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeIn 2s ease 2.2s forwards;
+  }
+
+  .hero-date {
+    font-family: 'EB Garamond', serif;
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.4);
+    margin-top: 1.5rem;
+    letter-spacing: 0.1em;
+    opacity: 0;
+    animation: fadeIn 2s ease 2.6s forwards;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    animation: fadeIn 2s ease 3s forwards, float 3s ease-in-out infinite 3s;
+  }
+
+  .scroll-hint svg {
+    width: 24px;
+    height: 24px;
+    stroke: var(--gold);
+    opacity: 0.5;
+  }
+
+  /* — Letter Body — */
+  .letter {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 4rem 1.5rem 6rem;
+  }
+
+  .letter-salutation {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 2rem;
+  }
+
+  .letter p {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    color: var(--text);
+  }
+
+  .letter .section-break {
+    text-align: center;
+    margin: 2.5rem 0;
+    color: var(--gold);
+    font-size: 1.2rem;
+    letter-spacing: 0.5em;
+    opacity: 0.6;
+  }
+
+  .letter .highlight {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .letter .ship-name {
+    font-style: italic;
+    color: var(--navy);
+    font-weight: 500;
+  }
+
+  /* — Closing — */
+  .closing {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(201,168,76,0.3);
+  }
+
+  .closing p {
+    margin-bottom: 1rem;
+  }
+
+  .signature {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-style: italic;
+    color: var(--ink);
+    margin-top: 2rem;
+  }
+
+  .signature-note {
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-top: 0.25rem;
+    font-style: italic;
+  }
+
+  /* — Footer — */
+  .footer {
+    background: var(--navy);
+    text-align: center;
+    padding: 3rem 1.5rem;
+  }
+
+  .footer-anchor {
+    width: 36px;
+    height: 36px;
+    margin-bottom: 1rem;
+  }
+
+  .footer-anchor svg {
+    width: 100%;
+    height: 100%;
+    fill: var(--gold);
+    opacity: 0.4;
+  }
+
+  .footer p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.05em;
+  }
+
+  .footer .ranks {
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+    color: rgba(255,255,255,0.2);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* — Animations — */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+
+  /* Scroll reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* — Mobile — */
+  @media (max-width: 600px) {
+    html { font-size: 17px; }
+    .letter { padding: 3rem 1.25rem 4rem; }
+    .letter p { font-size: 1.05rem; line-height: 1.9; }
+    .hero { padding: 2rem 1.25rem; }
+    .hero-epigraph { font-size: 1.05rem; padding: 0 0.5rem; }
+  }
+
+  /* Large text accessibility */
+  @media (min-width: 768px) {
+    .letter p { font-size: 1.15rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="anchor-symbol">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 2C10.9 2 10 2.9 10 4C10 4.74 10.4 5.39 11 5.73V7H13V5.73C13.6 5.39 14 4.74 14 4C14 2.9 13.1 2 12 2ZM11 8V11.27C9.17 11.84 7.84 13.17 7.27 15H4L8 19L12 15H9.32C9.84 13.95 10.82 13.16 12 12.87V20.77C9.17 20.43 7 18.05 7 15.13H5C5 19.04 8.13 22.24 12 22.59V23H12C12 23 12 23 12 23H12V22.59C15.87 22.24 19 19.04 19 15.13H17C17 18.05 14.83 20.43 12 20.77V12.87C13.18 13.16 14.16 13.95 14.68 15H12L16 19L20 15H16.73C16.16 13.17 14.83 11.84 13 11.27V8H11Z"/>
+    </svg>
+  </div>
+
+  <p class="hero-epigraph">
+    "At the stroke of the midnight hour, when the world sleeps,
+    Captain Noor Mohammed shall awake to life anew — not to a nation's freedom,
+    but to his own, earned across thirty-four years of unwavering service."
+    <span class="attribution">Adapted from Jawaharlal Nehru's address, 15 August 1947</span>
+  </p>
+
+  <h1 class="hero-title">Swallowing the Anchor</h1>
+  <p class="hero-subtitle">A Letter for My Father</p>
+  <p class="hero-date">31 March 2026 · Midnight</p>
+
+  <div class="scroll-hint">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round">
+      <path d="M12 5v14M5 12l7 7 7-7"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ===== LETTER ===== -->
+<main class="letter">
+
+  <p class="letter-salutation reveal">Dear Dad — Pipri, Pappa Monu, Poopi, Pops,</p>
+
+  <p class="reveal">
+    In a few moments, the clock will strike twelve. And when it does, something will change that has never changed in my entire life. For twenty-four years — for every single morning I have ever known — you have been a serving officer of the Indian Navy. Tonight, that chapter closes. Not because the dedication has faded, not because the discipline has wavered, but because the time has come. <span class="highlight">Thirty-three years and nine months.</span> From the day you were commissioned on 1 July 1992 to this very night. You gave them all.
+  </p>
+
+  <div class="section-break reveal">⚓</div>
+
+  <p class="reveal">
+    I was born aboard <span class="ship-name">INS Rana</span> — a Rana child, as they call me. Hina was born aboard <span class="ship-name">INS Rajput</span>. Before we ever knew the world, we knew the Navy. We knew the smell of ironed whites, the sound of polished shoes on the floor at dawn, the rhythm of a household that ran on naval time. That was not your habit. That was your offering. Every morning, you dressed as though the uniform deserved a ceremony, because to you, it did.
+  </p>
+
+  <p class="reveal">
+    I remember one Sunday. We had just come back from a long trip. I was refusing to polish my shoes — tired, lazy, unwilling. And there you were. Sitting on the edge of the bed, laying out your uniform the way a devout man arranges a prayer. Each medal placed softly, precisely, reverently — not with haste but with the quiet discipline of a man who had done this a thousand times before and would never once treat it as routine. The whites pressed. The medals aligned. The shoes gleaming. You did this for thirty-four years. I could only witness twenty-four of them, but Dad — I saw enough to understand that this was not preparation. <span class="highlight">This was worship.</span>
+  </p>
+
+  <div class="section-break reveal">⚓</div>
+
+  <p class="reveal">
+    You were not there when I was born. You were at sea, serving on a ship, and you had to get special permission to come back. I have teased you for this a hundred times. I have mocked you lovingly, mercilessly, the way a son does when he knows the truth underneath the joke. The truth is this: you were doing your duty. And Ammi — Sabena Noor, warrior in her own right — threw herself to the hospital and brought me into the world. You two have always worked like that. One holding the country. The other holding the family. Both holding everything together.
+  </p>
+
+  <p class="reveal">
+    Every time you came back from duty, you brought a book. Or a small something. It was never grand. It did not need to be. What was grand was the fact that somewhere at sea, somewhere on watch, somewhere doing the work that keeps a nation sleeping safely — you thought of me. You thought of us. <span class="highlight">That is the most beautiful thing a child can have.</span> Not the book. The thought.
+  </p>
+
+  <div class="section-break reveal">⚓</div>
+
+  <p class="reveal">
+    People talk about discipline as though it is a restriction. You lived it as a form of love. You woke at the same hour every day. You ate at the same time. You took your afternoon rest, you watched the news, you shaved and bathed at fixed hours — not because the Navy demanded it, but because you understood something most people never learn: that consistency is not the enemy of freedom. <span class="highlight">It is the architecture of it.</span> You built your life like you maintained your uniform — with care, with method, with an elegance that never asked to be noticed.
+  </p>
+
+  <p class="reveal">
+    And then there is the way you speak. The way you write. Dad, your written word is among the most structured, most precise, most beautiful I have encountered. Not ornamental — purposeful. Every sentence placed like a medal on that uniform. This is not flattery. My friends have witnessed it. Your colleagues have felt it. Hina inherited it — her intellect, her precision, her way of structuring thought — that is your gift flowing through her. The way a person communicates is not a skill. It is a signature. And yours has stunned every room it has entered.
+  </p>
+
+  <div class="section-break reveal">⚓</div>
+
+  <p class="reveal">
+    At fifty-eight, Masha Allah, you run. Not as a memory of fitness, but as a present act of will. I have been lucky enough to run beside you in half marathons — and Dad, watching you is like watching your entire philosophy compressed into a single act. You do not stop. You do not quit. You stay on the road. The road does not care about your rank or your medals or your years of service. It only asks: <span class="highlight">will you keep going?</span> And every single time, you answer yes.
+  </p>
+
+  <p class="reveal">
+    I will be honest, because this letter demands honesty. The Navy may not have given you every rank you deserved. The path may not have reached the height you envisioned. But Dad — you gave the nation your all. Every version of yourself that you could offer, you offered. And more importantly, every officer you mentored, every sailor you guided, every colleague you influenced with your professionalism and your thoroughness — they carried your standards into their own service. <span class="highlight">The safety of a nation is not built by one man. It is built by the influence one man leaves on a thousand.</span> That is your legacy. That is what you built.
+  </p>
+
+  <div class="section-break reveal">⚓</div>
+
+  <p class="reveal">
+    You fought to get Hina into school. You came home from the work that guards a nation, and you sat down in the night to figure out taxes for your family. You never played your card — not once. When the police stopped you, you did not flash your rank. When the world offered shortcuts, you chose the longer road, because that road was honest. You are a minority in your service, and you never let that become an excuse or a crutch. You let your work speak. You let your character speak. <span class="highlight">Service above self — whether it was family, faith, or nation.</span> That was never a slogan for you. It was simply how you lived.
+  </p>
+
+  <p class="reveal">
+    And this is what the people around you have always seen — not just the officer, but the man. Your friends know you as caring. Ammi knows you as her partner through every posting, every transfer, every uncertain night. And your children — we know you as the man who showed us that devotion to duty is not something to apologise for. My family has never once complained about the hours I work, because they understand what you taught us without ever saying it aloud: <span class="highlight">when the work matters, you give it everything. That is not sacrifice. That is purpose.</span>
+  </p>
+
+  <div class="section-break reveal">⚓</div>
+
+  <p class="reveal">
+    Look at what you have built beyond the service. Hina — a cancer researcher, brilliant and disciplined and sharp in every way you are. She has inherited your professionalism, your communication, your relentless intellect. And she has married Sean Ellis, a United States Marine, ensuring that the ethos of military life, the values you planted in this family, continue across oceans and generations. <span class="highlight">That is not coincidence. That is the current you set in motion decades ago, still flowing.</span>
+  </p>
+
+  <div class="section-break reveal">⚓</div>
+
+  <div class="closing reveal">
+    <p>
+      Dad, I cannot promise you a lineage in the same armed forces. I cannot promise you another anchor on another uniform. But I can promise you this:
+    </p>
+    <p>
+      I will carry your professionalism into every room I enter. I will carry your stamina onto every road I run. I will carry your friendliness, your kindness, your mentorship, and your discipline into every life I touch. I will aspire to bring to my field — to my country, through my own path — even a minuscule measure of the safety, the companionship, and the brotherhood that you gave to yours.
+    </p>
+    <p>
+      You walked the path through the Indian Naval Service. I aspire to walk mine in my own way. And I hope — I deeply, quietly hope — that somewhere along that road, I will do something that makes you proud. That makes the nation proud. The way you have made us proud every single day, for every single one of those thirty-four years.
+    </p>
+    <p>
+      The anchor is swallowed tonight, Captain. But the current you set — it does not stop.
+    </p>
+    <p>
+      It never stops.
+    </p>
+
+    <p class="signature">
+      Your son, your Rana child,<br>
+      Nihaan
+    </p>
+    <p class="signature-note">
+      For Capt. Noor Mohammed, IN — on the night he swallowed the anchor.
+    </p>
+  </div>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="footer-anchor">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 2C10.9 2 10 2.9 10 4C10 4.74 10.4 5.39 11 5.73V7H13V5.73C13.6 5.39 14 4.74 14 4C14 2.9 13.1 2 12 2ZM11 8V11.27C9.17 11.84 7.84 13.17 7.27 15H4L8 19L12 15H9.32C9.84 13.95 10.82 13.16 12 12.87V20.77C9.17 20.43 7 18.05 7 15.13H5C5 19.04 8.13 22.24 12 22.59V23H12C12 23 12 23 12 23H12V22.59C15.87 22.24 19 19.04 19 15.13H17C17 18.05 14.83 20.43 12 20.77V12.87C13.18 13.16 14.16 13.95 14.68 15H12L16 19L20 15H16.73C16.16 13.17 14.83 11.84 13 11.27V8H11Z"/>
+    </svg>
+  </div>
+  <p>Capt. Noor Mohammed, Indian Navy</p>
+  <p class="ranks">1 July 1992 — 31 March 2026</p>
+</footer>
+
+<!-- Scroll Reveal Script -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => observer.observe(el));
+  });
+</script>
+
+</body>
+</html>
